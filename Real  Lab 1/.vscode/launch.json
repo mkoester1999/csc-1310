@@ -2,14 +2,24 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
+      "request": "launch",
+      "name": "Launch",
+      "program": "${workspaceFolder}/build/Debug/outDebug",
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    
+        
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/mitchell/Documents/csc-1310/Lab 1/1310 lab 1 given files",
-      "program": "/home/mitchell/Documents/csc-1310/Lab 1/1310 lab 1 given files/build/Debug/outDebug",
+      "cwd": "/home/mitchell/Documents/csc-1310/Real  Lab 1",
+      "program": "/home/mitchell/Documents/csc-1310/Real  Lab 1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
