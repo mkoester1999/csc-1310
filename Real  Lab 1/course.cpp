@@ -52,12 +52,14 @@ void printCourse(Course* newCourse)
 {
     cout << "Course Name:\t\t" << newCourse->name << endl;
     cout << "Course Location:\t" << newCourse->location << endl;
+    cout << "Course Hours:\t\t" << newCourse->creditHours << endl;
     cout << "Number of Sections:\t" << newCourse->numSections << endl;
-    cout << "Credit Hours:\t\t" << newCourse->creditHours << endl;
-    cout << "Sections:\n";
+    cout << "Course Sections:\n";
     //print out values of the array sectionPtr points to
     for (int i = 0; i < newCourse->numSections; i++)
     {
-        cout << "\t\t" << newCourse->sectionsPtr[i] << endl;
+        cout << "\t\t\t" << newCourse->sectionsPtr[i] << endl;
     }
+
+    
 }
