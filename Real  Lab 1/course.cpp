@@ -50,11 +50,11 @@ void destroyCourse(Course* newCourse)
 //Returns void
 void printCourse(Course* newCourse)
 {
-    cout << "Course Name:\t\t" << newCourse->name << endl;
-    cout << "Course Location:\t" << newCourse->location << endl;
-    cout << "Course Hours:\t\t" << newCourse->creditHours << endl;
-    cout << "Number of Sections:\t" << newCourse->numSections << endl;
-    cout << "Course Sections:\n";
+    cout << "COURSE NAME:\t\t" << newCourse->name << endl;
+    cout << "COURSE LOCATION:\t" << newCourse->location << endl;
+    cout << "COURSE HOURS:\t\t" << newCourse->creditHours << endl;
+    cout << "NUMBER OF SECTIONS:\t" << newCourse->numSections << endl;
+    cout << "COURSE SECTIONS:\n";
     //print out values of the array sectionPtr points to
     for (int i = 0; i < newCourse->numSections; i++)
     {

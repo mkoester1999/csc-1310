@@ -17,8 +17,8 @@ struct Course
 {
 
     string name;
-    string location; 
-    string* sectionsPtr;    
+    string location;
+    string* sectionsPtr;
     int numSections;
     int creditHours;
     
