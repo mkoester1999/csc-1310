@@ -27,3 +27,16 @@ void VideoGame::PrintVideoGameDetails()
     cout<<year<<endl;
     
 }
+
+Text* VideoGame::getVideoGameTitle()
+{
+    return title;
+}
+
+void VideoGame::PrintVideoGameDetailsToFile(fstream& file)
+{
+    file<<title->getText()<<endl;
+    file<<developer->getText()<<endl;
+    file<<publisher->getText()<<endl;
+    file<<year<<endl;
+}
