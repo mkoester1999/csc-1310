@@ -24,11 +24,11 @@ public:
     //return: void
     void addVideoGameToArray();
 
-    //displayVideogGames function
-    //prints all video games in array
+    //displayVideoGames function
+    //prints all video games in array   
     //parameters: none
     //returns: void
-    void displayVideogGames();
+    void displayVideoGames();
 
     //displayVideoGameTitles function
     //prints all video game titles in array
@@ -42,9 +42,17 @@ public:
     //returns: void
     void loadVideoGamesFromFile(char* fileName);
 
-    //removeVideoGasmesFromArray function
+    //removeVideoGamesFromArray function
     //removes single video game from game library
-    //
+    //parameters: none
+    //returns: none
+    void removeVideoGamesFromArray();
+
+    //saveToFile function
+    //saves video games to file based on filename
+    //parameters: char* fileName
+    //returns: void
+    void saveToFile(char* fileName);
 
 private:
     VideoGame** videoGamesArray;
