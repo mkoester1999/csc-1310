@@ -94,6 +94,6 @@ int main()
                         endProgram = true;//exit condition for do while loop
                         break;
     }    
-    }while (endProgram == false);
+    }while (endProgram == false); //exit condition
     return 0;
 }
