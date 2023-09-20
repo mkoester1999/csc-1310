@@ -46,7 +46,7 @@ public:
     //removes single video game from game library
     //parameters: none
     //returns: none
-    void removeVideoGamesFromArray();
+    void removeVideoGameFromArray();
 
     //saveToFile function
     //saves video games to file based on filename
