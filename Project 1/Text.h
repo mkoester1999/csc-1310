@@ -41,7 +41,7 @@ public:
     //returns length of textArray
     //parameters: none
     //returns: int
-    uint getLength();
+    int getLength();
 private:
     const char* textArray;
     int textLength;

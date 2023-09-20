@@ -41,7 +41,7 @@ const char* Text::getText()
     return textArray;
 }
 
-uint Text::getLength()
+int Text::getLength()
 {
     return strlen(textArray);
 }
