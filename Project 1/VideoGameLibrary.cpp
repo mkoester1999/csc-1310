@@ -42,7 +42,7 @@ void VideoGameLibrary::addVideoGameToArray()
     cout<<"Enter video game title: ";
     cin.getline(title, 100);
     //create text object with title as parameter
-    Text* text = new Text(title);
+    Text* gameTitle = new Text(title);
     delete[] title;
 
     //ask for video game developer as char pointer
@@ -63,14 +63,33 @@ void VideoGameLibrary::addVideoGameToArray()
 
     //ask for video game year
     int year;
-    cout<<"Enter video game year: ";
+    
 
     //while loop to check if year is valid
     do
     {
+        cout<<"Enter video game year. Must be a valid integer: ";
         cin.clear();
         cin.ignore();
         cin>>year;
-    }while(!year);
+    }while(cin.fail());
+    cin.ignore();
+
+    //create video game object with parameters we got from cin
+    VideoGame* newVideoGame = new VideoGame(gameTitle, gameDeveloper, gamePublisher, year);
+
+    //add video game to array if there is room. If not, resize array with double max size
+    if(numGames < maxGames)
+    {
+        videoGamesArray[numGames] = newVideoGame;
+        numGames++;
+    }
+    else
+    {
+        resizeVideoGameArray(maxGames*2);
+        videoGamesArray[numGames] = newVideoGame;
+        numGames++;
+    }
+
 
 }
