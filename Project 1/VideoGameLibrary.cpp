@@ -111,3 +111,129 @@ void VideoGameLibrary::displayVideoGameTitles()
         videoGamesArray[i]->getVideoGameTitle()->displayText();
     }
 }
+
+
+void VideoGameLibrary::loadVideoGamesFromFile(char* gamesFile)
+{
+    //create file stream
+    fstream file;
+    //open file
+    file.open(gamesFile, ios::in);
+    //check if file is open
+    if(file.is_open())
+    {
+        //create temp variables
+        char* title = new char[100];
+        char* developer = new char[100];
+        char* publisher = new char[100];
+        int year;
+
+        //while loop to read in data
+        while(!file.eof())
+        {
+            //read in title
+            file.getline(title, 100);
+            //create text object with title as parameter
+            Text* gameTitle = new Text(title);
+
+            //read in developer
+            file.getline(developer, 100);
+            //create text object with developer as parameter
+            Text* gameDeveloper = new Text(developer);
+
+            //read in publisher
+            file.getline(publisher, 100);
+            //create text object with publisher as parameter
+            Text* gamePublisher = new Text(publisher);
+
+            //read in year
+            file>>year;
+            file.ignore();
+
+            //create video game object with parameters we got from file
+            VideoGame* newVideoGame = new VideoGame(gameTitle, gameDeveloper, gamePublisher, year);
+
+            //add video game to array if there is room. If not, resize array with double max size
+            if(numGames < maxGames)
+            {
+                videoGamesArray[numGames] = newVideoGame;
+                numGames++;
+            }
+            else
+            {
+                resizeVideoGameArray(maxGames*2);
+                videoGamesArray[numGames] = newVideoGame;
+                numGames++;
+            }
+        }
+        //close file
+        file.close();
+    }
+    else
+    {
+        cout<<"File failed to open."<<endl;
+    }
+}
+
+void VideoGameLibrary::removeVideoGameFromArray()
+{
+    //check if numVideoGames > 1
+    if (numGames > 1)
+    {
+        //display all video game titles
+        displayVideoGameTitles();
+        int section;
+        do
+        {
+            //request for number between 1 and numGames
+            cout<<"Please enter a number between 1 and " <<numGames << " : ";
+            cin.clear();
+            cin.ignore();
+            cin>>section;
+
+        }while(cin.fail());
+        cin.ignore();
+
+        //delete video game at position - 1 (because it's starting at 1)
+        cout<<"Deleting " << videoGamesArray[section-1] <<endl;
+        delete videoGamesArray[section-1];
+        
+    }
+    //added edgecases
+    else if (numGames == 1)
+    {
+        //delete video game at position 0
+        cout<<"Deleting " << videoGamesArray[0] <<endl;
+        delete videoGamesArray[0];
+    }
+    else
+    {
+        cout<<"No video games to delete."<<endl;
+    }
+}
+
+void VideoGameLibrary::saveToFile(char* fileName)
+{
+    //create file stream
+    fstream file;
+    //open file
+    cout <<"Attempting to Open File...\n";
+    file.open(fileName, ios::out);
+    //check if file is open
+    if(file.is_open())
+    {   
+        cout <<"File Opened Successfully!\n";
+        //iterate through array and call printvideogamedetailstofile function
+        for(int i = 0; i < numGames; i++)
+        {
+            videoGamesArray[i]->PrintVideoGameDetailsToFile(file);
+        }
+        //close file
+        cout <<"File Saved Successfully!\nClosing File...\n";
+        file.close();
+    }
+    else
+    {
+        cout<<"File failed to open."<<endl;
+    }
+}
