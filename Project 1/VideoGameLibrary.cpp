@@ -90,6 +90,24 @@ void VideoGameLibrary::addVideoGameToArray()
         videoGamesArray[numGames] = newVideoGame;
         numGames++;
     }
+    
+}
+
+void VideoGameLibrary::displayVideoGames()
+{
+    //iterate through array and call printvideogamedetails function
+    for(int i = 0; i < numGames; i++)
+    {
+        videoGamesArray[i]->PrintVideoGameDetails();
+    }
+}
 
 
+void VideoGameLibrary::displayVideoGameTitles()
+{
+    //iterate through array and call getvideogametitle function
+    for(int i = 0; i < numGames; i++)
+    {
+        videoGamesArray[i]->getVideoGameTitle()->displayText();
+    }
 }
