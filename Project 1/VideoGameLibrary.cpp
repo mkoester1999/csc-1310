@@ -119,10 +119,12 @@ void VideoGameLibrary::loadVideoGamesFromFile(char* gamesFile)
     //create file stream
     fstream file;
     //open file
+    cout <<"Attempting to Open File...\n";
     file.open(gamesFile, ios::in);
     //check if file is open
     if(file.is_open())
-    {
+    {   
+        cout <<"File Opened Successfully!\n";
         //create temp variables
         char* title = new char[100];
         char* developer = new char[100];

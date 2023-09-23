@@ -6,7 +6,7 @@
 */
 
 #include <fstream>
-#include<iostream>
+#include <iostream>
 #include "VideoGame.h"
 #include "VideoGameLibrary.h"
 
@@ -47,7 +47,7 @@ int main()
         cin >> choice;
     }
 
-    char* fileName;
+    char* fileName = new char[100]; //initalize to avoid loading errors
     switch(choice)
     {
                     case 1:

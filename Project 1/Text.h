@@ -9,6 +9,7 @@
 #ifndef text_h
 #define text_h
 #include<iostream>
+#include <cstring>
 
 using namespace std;
 

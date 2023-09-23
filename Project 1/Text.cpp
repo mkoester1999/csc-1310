@@ -7,7 +7,7 @@
 */
 
 #include "Text.h"
-#include <cstring>
+
 
 Text::Text(const char* text)
 {
