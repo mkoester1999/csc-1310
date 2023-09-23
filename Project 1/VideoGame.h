@@ -1,3 +1,5 @@
+#ifndef _VideoGame_h
+#define _VideoGame_h
 #include "Text.h"
 #include <fstream>
 
@@ -36,3 +38,4 @@ private:
     Text* publisher;
     int year; 
 };
+#endif

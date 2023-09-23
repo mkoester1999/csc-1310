@@ -40,6 +40,7 @@ void VideoGameLibrary::addVideoGameToArray()
     //ask for video game title as char pointer
     char* title = new char[100];
     cout<<"Enter video game title: ";
+    cin.ignore();
     cin.getline(title, 100);
     //create text object with title as parameter
     Text* gameTitle = new Text(title);

@@ -1,3 +1,6 @@
+#ifndef _VideGameLibrary_h
+#define _VideGameLibrary_h
+
 #include "VideoGame.h"
 
 using namespace std;
@@ -61,3 +64,4 @@ private:
     
 
 };
+#endif

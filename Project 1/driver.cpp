@@ -47,13 +47,13 @@ int main()
         cin >> choice;
     }
 
+    char* fileName;
     switch(choice)
     {
                     case 1:
                         //Load game from file
                         //If the user chooses to load a video game from a file, ask the name of the file and call the VideoGameLibrary’s 
                         //loadVideo gamesFromFile function, sending the filename as a string
-                        char* fileName;
                         cout<<"Enter the name of the file you would like to load from: "<<endl;
                         cin.ignore();
                         cin.getline(fileName, 100);
@@ -64,7 +64,6 @@ int main()
                     case 2:
                         /*Save video game to file If the user chooses to save video games to a file, then ask the name of the file and call the VideoGameLibrary’s 
                         saveToFile function, sending the filename as a string.*/
-                        char* fileName;
                         cout<<"Enter the name of the file you would like to save to: "<<endl;
                         cin.ignore();
                         cin.getline(fileName, 100);
