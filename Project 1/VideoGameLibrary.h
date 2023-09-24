@@ -1,3 +1,10 @@
+/*
+	Header for VideoGameLibrary class
+	Project 1 - CSC1310
+	Mitchell Koester & Bryant Koester
+	9/25/23
+*/
+
 #ifndef _VideGameLibrary_h
 #define _VideGameLibrary_h
 

@@ -1,7 +1,7 @@
 /*
 	Header for Text Class
 	Project 1 - CSC1310
-	Mitchell Koester 
+	Mitchell Koester & Bryant Koester
 
 	9/25/23
 */

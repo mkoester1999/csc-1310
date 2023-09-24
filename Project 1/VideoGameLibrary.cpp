@@ -1,3 +1,10 @@
+/*
+	Header for VideoGameLibrary implementation
+	Project 1 - CSC1310
+	Mitchell Koester & Bryant Koester
+	9/25/23
+*/
+
 #include"VideoGameLibrary.h"
 
 using namespace std;
@@ -11,6 +18,10 @@ VideoGameLibrary::VideoGameLibrary(int maxGamesSize)
 
 VideoGameLibrary::~VideoGameLibrary()
 {
+    for (int i = 0; i < numGames; i++)
+    {
+        delete videoGamesArray[i];
+    }
     delete[] videoGamesArray;
 }
 
@@ -64,18 +75,15 @@ void VideoGameLibrary::addVideoGameToArray()
 
     //ask for video game year
     int year;
-    
-
     //while loop to check if year is valid
     do
     {
         cout<<"Enter video game year. Must be a valid integer: ";
         cin.clear();
-        cin.ignore();
         cin>>year;
+        cin.ignore();
     }while(cin.fail());
-    cin.ignore();
-
+    
     //create video game object with parameters we got from cin
     VideoGame* newVideoGame = new VideoGame(gameTitle, gameDeveloper, gamePublisher, year);
 
@@ -100,17 +108,22 @@ void VideoGameLibrary::displayVideoGames()
     for(int i = 0; i < numGames; i++)
     {
         videoGamesArray[i]->PrintVideoGameDetails();
+        cout<<endl;
     }
+    
 }
 
 
 void VideoGameLibrary::displayVideoGameTitles()
 {
+    cout<<endl;
     //iterate through array and call getvideogametitle function
     for(int i = 0; i < numGames; i++)
     {
+        cout<<i+1<<". ";
         videoGamesArray[i]->getVideoGameTitle()->displayText();
     }
+    
 }
 
 
@@ -131,8 +144,8 @@ void VideoGameLibrary::loadVideoGamesFromFile(char* gamesFile)
         char* publisher = new char[100];
         int year;
 
-        //while loop to read in data
-        while(!file.eof())
+        //while loop to read in data with comparison peek to EOF and terminate loop if it reaches EOF
+        while(file.peek() != EOF)
         {
             //read in title
             file.getline(title, 100);
@@ -151,6 +164,7 @@ void VideoGameLibrary::loadVideoGamesFromFile(char* gamesFile)
 
             //read in year
             file>>year;
+            //ignore newline character (or else it will read in a blank line as a year and crash the program.)
             file.ignore();
 
             //create video game object with parameters we got from file
@@ -189,7 +203,7 @@ void VideoGameLibrary::removeVideoGameFromArray()
         do
         {
             //request for number between 1 and numGames
-            cout<<"Please enter a number between 1 and " <<numGames << " : ";
+            cout<<"\nPlease enter a number between 1 and " <<numGames << " : ";
             cin.clear();
             cin.ignore();
             cin>>section;
@@ -198,16 +212,20 @@ void VideoGameLibrary::removeVideoGameFromArray()
         cin.ignore();
 
         //delete video game at position - 1 (because it's starting at 1)
-        cout<<"Deleting " << videoGamesArray[section-1] <<endl;
+        cout<<"Deleting "; 
+        videoGamesArray[section-1]->getVideoGameTitle()->displayText();
+        numGames--;
         delete videoGamesArray[section-1];
-        
+                
     }
     //added edgecases
     else if (numGames == 1)
     {
         //delete video game at position 0
         cout<<"Deleting " << videoGamesArray[0] <<endl;
+        numGames--;
         delete videoGamesArray[0];
+        
     }
     else
     {

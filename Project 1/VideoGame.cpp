@@ -1,3 +1,10 @@
+/*
+	Header for VideoGame Implementation
+	Project 1 - CSC1310
+	Mitchell Koester & Bryant Koester
+	9/25/23
+*/
+
 #include "VideoGame.h"
 
 VideoGame::VideoGame(Text* videoGameTitle, Text* gameDeveloper, Text* gamePublisher, int gameYear)

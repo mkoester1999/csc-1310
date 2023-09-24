@@ -1,5 +1,5 @@
 /*
-	Header for Text Class
+	Header for Driver
 	Project 1 - CSC1310
 	Mitchell Koester & Bryant Koester
 	9/25/23
@@ -21,6 +21,13 @@ int main()
     
     cout<<"How many video games can your library hold?"<<endl;
     cin>>maxGamesSize;
+    while(cin.fail())
+    {
+        cin.clear();
+        cin.ignore();
+        cout<<"Invalid input. Please enter a number: ";
+        cin>>maxGamesSize;
+    }
     VideoGameLibrary* videogameLibrary = new VideoGameLibrary(maxGamesSize);
 
     //create a 6 case switch statement that will allow the user to choose from the following options:
@@ -31,6 +38,7 @@ int main()
     //5:display all video games
     //6:remove all video games from library and end program using do while set to a boolean variable
     do{
+    cout << endl;    
     cout << "What would you like to do?" << endl;
     cout << "1. Load video games from file." << endl;
     cout << "2. Save video games to a file." << endl;
@@ -41,8 +49,10 @@ int main()
     cout <<"CHOOSE 1-6: ";
     cin >> choice;
     //input validation 
-    while (choice < 1 || choice > 6)
+    while (cin.fail() || choice < 1 || choice > 6)
     {
+        cin.clear();
+        cin.ignore();
         cout << "Invalid input. Please enter a number between 1 and 6: ";
         cin >> choice;
     }
@@ -88,7 +98,7 @@ int main()
 
                     case 6:
                         //remove all video games from library and end program using do while set to a boolean variable
-                        cout << "Deleting video game library...Goodbye!" << endl;
+                        cout << "Deleting video games library...Goodbye!" << endl;
                         delete videogameLibrary;
                         endProgram = true;//exit condition for do while loop
                         break;

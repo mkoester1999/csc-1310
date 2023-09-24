@@ -1,3 +1,10 @@
+/*
+	Header for VideoGame class
+	Project 1 - CSC1310
+	Mitchell Koester & Bryant Koester
+	9/25/23
+*/
+
 #ifndef _VideoGame_h
 #define _VideoGame_h
 #include "Text.h"
