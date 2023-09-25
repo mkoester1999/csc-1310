@@ -1,0 +1,3 @@
+The project was easy for the most part. The only bit I'd say I wasn't a fan of was making a Text class. I understand that it gives us more experience in working with classes and multiple headers, but it felt weird to reinvent the wheel when we could have just used teh string class.
+
+I worked with Bryant Koester as my partner, and I felt like the work was evenly distrubuted - I worked on the VideoGame and Text classes, and then about half of the VideoGameLibrary class, and he worked on the driver and the VideoGameLibrary class. Debugging was also very fast with the two of us.
