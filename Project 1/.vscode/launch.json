@@ -15,9 +15,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": false,
-      "cwd": "/home/mitchell/Documents/csc-1310/Project 1",
-      "program": "/home/mitchell/Documents/csc-1310/Project 1/build/Debug/outDebug",
+      "externalConsole": true,
+      "cwd": "c:/Users/DELL/Documents/GitHub/csc-1310/Project 1",
+      "program": "c:/Users/DELL/Documents/GitHub/csc-1310/Project 1/build/Debug/outDebug",
       "MIMode": "lldb",
       "miDebuggerPath": "lldb",
       "setupCommands": [

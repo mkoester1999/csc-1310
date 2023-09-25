@@ -21,7 +21,8 @@ int main()
     
     cout<<"How many video games can your library hold?"<<endl;
     cin>>maxGamesSize;
-    while(cin.fail())
+    //input validation loop for maxGamesSize
+    while(cin.fail()) //verify input is an integer, not accounting for large numbers
     {
         cin.clear();
         cin.ignore();
@@ -48,8 +49,8 @@ int main()
     cout << "6. Remove ALL video games from this library and end program." << endl;
     cout <<"CHOOSE 1-6: ";
     cin >> choice;
-    //input validation 
-    while (cin.fail() || choice < 1 || choice > 6)
+    //input validation for choice switch case statement
+    while (cin.fail() || choice < 1 || choice > 6) //cin.fail() to check for non integer input
     {
         cin.clear();
         cin.ignore();
@@ -103,6 +104,6 @@ int main()
                         endProgram = true;//exit condition for do while loop
                         break;
     }    
-    }while (endProgram == false); //exit condition
+    }while (endProgram == false); //exit condition tied to case 6 boolean variable being true
     return 0;
 }
