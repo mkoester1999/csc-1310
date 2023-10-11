@@ -1,6 +1,7 @@
 #ifndef list_h
 #define list_h
 
+
 using namespace std;
 
 template<class T>
@@ -167,7 +168,7 @@ listNode<T>* List<T>::merge(listNode<T>* node1, listNode<T>* node2)
     if(!node2) return node1;
 
     //if node1 is smaller than node2
-    if (node1->element < node2->element)
+    if (node1->element.getPopulation() < node2->element.getPopulation())
     {   
         //recursively call merge to get node1->next
         node1->next = merge(node1->next, node2);

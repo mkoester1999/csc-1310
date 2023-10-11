@@ -19,7 +19,9 @@ int main()
 	//create a new list of county pointers ------------------------------------------------------------------
 
 	County* newCounty;
-
+	
+	List<County>* countyList = new List<County>();
+	
 	if(file.good()) {
 	while(getline(file, line, ','))
 	{
@@ -40,12 +42,14 @@ int main()
 
 		newCounty = new County(index, county, state, pop);
 		//append newCounty to your list-----------------------------------------------------------------------------------
+		countyList.append(newCounty);
 	}}
 
 	file.close();
 
 	//call mergesort---------------------------------------------------------------------------------------------
+	countyList.mergesort();
 	//print the list-----------------------------------------------------------------------------------------------------
-
+	List::print();
 	return 0;
 }
