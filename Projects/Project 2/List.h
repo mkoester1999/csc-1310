@@ -53,31 +53,52 @@ public:
     //returns: void
     void mergesort();
 
+    //extra credit
+    //selectionSort function
+    //sorts the list
+    //ascending order
+    //parameters none
+    //void selectionSort();
+
+    //extra credit
+    //swap function
+    //swaps two nodes
+    //parameters: listNode<T>*, listNode<T>*
+    //called by selectionSort
+    //void swap(listNode<T>*, listNode<T>*);
 
 private:
     //print function
     //prints out every element of list after the parameter node.
     //parameters: listNode<T>
     //returns: void
+    //comparing Ts with *(node->value)
     void print(listNode<T>* node);
 
     //mergesort function overload
     //manages recursive calls for mergesort function
     //parameters: listNode<T>, listNode<T>
     //returns: Node<T>*
+    //comparing Ts with *(node->value)
     listNode<T>* mergesort(listNode<T>* node1, listNode<T>* node2);
     
     //merge function
     //merges two sorted lists
     //parameters: listNode<T>*, listNode<T>*
     //returns: listNode<T> *
+    //comparing Ts with *(node->value)
     listNode<T>* merge(listNode<T>* node1, listNode<T>* node2);
 
     //split function
     //subdivide list partition into 2 new lists
     //paramters: listNode<T>*, listNode<T>*
     //returns: listNode<T>*
+    //comparing Ts with *(node->value)
     listNode<T>* split(listNode<T>* node1, listNode<T>* node2);
+
+    
+
+    
     
 
 
@@ -144,7 +165,7 @@ void List<T>::print(listNode<T>* node)
 {
     cout << node->element << endl;
 }
-
+//this needs to be in descending order
 template<class T>
 void List<T>::mergesort()
 {
