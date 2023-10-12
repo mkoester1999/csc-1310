@@ -1,3 +1,11 @@
+/*
+	Driver for Program
+	Project 2 - CSC1310
+	Mitchell Koester & Bryant Koester
+
+	10/13/23
+*/
+
 #include<fstream>
 #include<iostream>
 #include<string>
@@ -42,14 +50,14 @@ int main()
 
 		newCounty = new County(index, county, state, pop);
 		//append newCounty to your list-----------------------------------------------------------------------------------
-		countyList.append(newCounty);
+		countyList->append(*newCounty);//pntr made error go away?
 	}}
 
 	file.close();
 
 	//call mergesort---------------------------------------------------------------------------------------------
-	countyList.mergesort();
+	countyList->mergesort();
 	//print the list-----------------------------------------------------------------------------------------------------
-	List::print();
+	countyList->print();
 	return 0;
 }

@@ -205,5 +205,20 @@ listNode<T>* List<T>::split(listNode<T>* _head, listNode<T>* _tail)
     midNode->next = nullptr;
     return midNode;
 }
-
+//destructs list
+//no parameters/arguments
+template<class T>
+List<T>::~List()
+{
+    listNode* temp = head;
+    while(temp != nullptr)
+    {
+        head = head->next;
+        delete temp;
+        temp = head;
+    }
+    delete head;
+    delete tail;
+    delete temp;
+}
 #endif
