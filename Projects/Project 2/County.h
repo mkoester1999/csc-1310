@@ -1,3 +1,11 @@
+/*
+	Header file for County class
+	Project 2 - CSC1310
+	Mitchell Koester & Bryant Koester
+
+	10/13/23
+*/
+
 #ifndef COUNTY_H
 #define COUNTY_H
 

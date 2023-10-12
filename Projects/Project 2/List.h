@@ -1,3 +1,11 @@
+/*
+	Header for List class
+	Project 2 - CSC1310
+	Mitchell Koester & Bryant Koester
+
+	10/13/23
+*/
+
 #ifndef list_h
 #define list_h
 
