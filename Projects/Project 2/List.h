@@ -49,17 +49,17 @@ private:
     typename List<T>::listNode* mergesort(listNode* node1, listNode* node2)
     {
         //base case
-        if(!node1 || node1 == node2 )
+        if(!node1 || !node2 || node1 == node2 )
         {
             return node1;
         }
 
-        listNode* midNode = split(node1, node2);
+        listNode* right = split(node1, node2);
 
-        node1 = mergesort(node1, midNode);
-        midNode = mergesort(midNode, tail);
+        listNode* left = mergesort(node1, right->prev);
+        right = mergesort(right, node2);
         
-        return merge(head, midNode);
+        return merge(left,right);
     }
     
     //merge function
@@ -102,7 +102,7 @@ private:
     //paramters: listNode*, listNode*
     //returns: listNode*
     //comparing Ts with *(node->value)
-    typename List<T>::listNode* split(listNode* _head, listNode* _tail)
+    /*typename List<T>::listNode* split(listNode* _head, listNode* _tail)
     {
         //traverse from both sides of list to find middle node. Also check to see if _head->next is null
         while ((_head!=_tail || _tail->prev!=_head) && _head->next != nullptr)
@@ -113,7 +113,43 @@ private:
         listNode* midNode = _head;
         midNode->next = nullptr;
         return midNode;
-}
+    }*/
+    typename List<T>::listNode* split(listNode* _head, listNode* _tail)
+    {
+        /*if(!head || !head->next)
+        {
+            _head = head;
+            _tail = nullptr;
+            return _head;
+        }
+        //traverse from both sides of list to find middle node. Also check to see if _head->next is null
+        while ((_head!=_tail || _tail->prev!=_head) && _head->next != nullptr && _tail->prev != nullptr)
+        {
+            _head = _head->next;
+            _tail = _tail->prev;
+        }
+        listNode* midNode = _head;
+        midNode->next = nullptr;
+
+        return midNode;*/
+
+        listNode *left = _head;
+        listNode *right = _tail;
+
+        while(left != right)
+        {
+            right = right->prev;
+
+            if(left !=right)
+            {
+                left = left->next;
+            }
+        }
+        listNode *midNode = left->next;
+        left->next = nullptr;
+        return midNode;
+    }
+
 
 
 public:
@@ -191,9 +227,10 @@ public:
         if (head && tail)
         {
             listNode* midNode = split(head, tail);
-            head = mergesort(head, midNode);
+            head = mergesort(head, midNode->prev);
             midNode = mergesort(midNode, tail);
         }
+        merge(head, midNode);
         
     }
 
