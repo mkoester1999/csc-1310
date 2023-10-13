@@ -10,7 +10,6 @@
 #define list_h
 #include<iostream>
 
-//using namespace std;
 
 
 
@@ -63,25 +62,6 @@ private:
 
         listNode* left = mergesort(node1, mid->prev);
         listNode* right  = mergesort(mid, node2);
-
-            
-        
-       // head = merge(left, right);
-        
-
-        
-        //tail = head;
-        //update left pointers
-        /*while(head->prev != nullptr)
-        {
-            head = head->prev;
-        }
-        //update right pointers
-        while(tail->next != nullptr)
-        {
-            tail = tail->next;
-        }
-        */
         
         return merge(left, right);
     }
@@ -118,7 +98,6 @@ private:
             //set next and prev of node2
             node2->next->prev = node2;
             node2->prev = nullptr;
-            //LOG_DEBUG("Node2 prev set to nullptr. node2->prev=" << node2->prev);
 
             return node2;
         }
@@ -127,29 +106,11 @@ private:
     //subdivide list partition into 2 new lists
     //paramters: listNode*, listNode*
     //returns: listNode*
-    //comparing Ts with *(node->value)
-    /*typename List<T>::listNode* split(listNode* _head, listNode* _tail)
-    {
-        //traverse from both sides of list to find middle node. Also check to see if _head->next is null
-        while ((_head!=_tail || _tail->prev!=_head) && _head->next != nullptr)
-        {
-            _head = _head->next;
-            _tail = _tail->prev;
-        }
-        listNode* midNode = _head;
-        midNode->next = nullptr;
-        return midNode;
-    }*/
     typename List<T>::listNode* split(listNode* _head, listNode* _tail)
     {
-        /*if(!head || !head->next)
-        {
-            _head = head;
-            _tail = nullptr;
-            return _head;
-        }
+        
         //traverse from both sides of list to find middle node. Also check to see if _head->next is null
-        */while (_head != _tail && _head->next != _tail)
+        while (_head != _tail && _head->next != _tail)
         {
             _head = _head->next;
             _tail = _tail->prev;
@@ -159,27 +120,7 @@ private:
 
         return midNode;
 
-       /* if (_head == nullptr || _head->next == nullptr)
-        {
-            return _head;
-        }
-
-
-        listNode *left = _head;
-        listNode *right = _tail;
-
-        while(left != right)
-        {
-            right = right->prev;
-
-            if(left !=right)
-            {
-                left = left->next;
-            }
-        }
-        listNode *midNode = left->next;
-        left->next = nullptr;
-        return midNode;*/
+     
 
     }
 
@@ -217,18 +158,6 @@ public:
     void print()
     {   
         print(head);
-        /*
-        listNode* temp = head; //temp ptr to head
-        //checks to see if head is null, if not, prints out list
-        if(head)
-        {
-            while(temp != nullptr)//exit condition of nullptr
-            {
-                print(temp); //print out element
-                temp = temp->next;
-            }
-        }
-    delete temp; //free up null ptr*/
     }
 
     //append function
@@ -258,21 +187,7 @@ public:
     //returns: void
     void mergesort()
     {
-        head = mergesort(head, tail);
-        /*
-        if (head && tail)
-        {
-            listNode* midNode = split(head, tail);
-            head = mergesort(head, midNode->prev);
-            midNode = mergesort(midNode, tail);
-        }
-        listNode* temp = head;
-        while (temp->next != nullptr)
-        {
-            temp = temp->next;
-        }
-        tail = temp;*/
-        
+        head = mergesort(head, tail);    
     }
 
     //extra credit
@@ -281,6 +196,7 @@ public:
     //ascending order
     //parameters none
     //void selectionSort();
+    
 
     //extra credit
     //swap function

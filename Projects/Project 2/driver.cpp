@@ -50,7 +50,7 @@ int main()
 
 		newCounty = new County(index, county, state, pop);
 		//append newCounty to your list-----------------------------------------------------------------------------------
-		countyList->append(*newCounty);//pntr made error go away?
+		countyList->append(*newCounty);
 	}}
 
 	file.close();
