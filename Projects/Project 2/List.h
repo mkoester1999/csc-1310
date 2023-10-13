@@ -133,6 +133,12 @@ private:
 
         return midNode;*/
 
+        if (_head == nullptr || _head->next == nullptr)
+        {
+            return _head;
+        }
+
+
         listNode *left = _head;
         listNode *right = _tail;
 
@@ -230,7 +236,11 @@ public:
             head = mergesort(head, midNode->prev);
             midNode = mergesort(midNode, tail);
         }
-        merge(head, midNode);
+        while (temp->next != nullptr)
+        {
+            temp = temp->next;
+        }
+        tail = temp;
         
     }
 
