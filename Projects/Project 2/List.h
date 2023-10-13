@@ -25,7 +25,7 @@ private:
         T element;
         listNode* next;
         listNode* prev;
-        listNode(const T& value) : element(value), prev(nullptr), next(nullptr) {} //don't know why I need constructor, but I get an error if I don't use it
+        listNode(const T& value) : element(value), prev(nullptr), next(nullptr) {} //don't know why I need constructor, but default constructor gets implicitly delted for some reason
 
     };
     listNode* head;
@@ -161,28 +161,19 @@ public:
     //returns: void
     void append(T element)
     {
-        //check if list is empty
-        if(head)
+        listNode* newNode = new listNode(element);
+        if (!head) 
         {
-            //make new node pointer with value of element
-            listNode* newNode = new listNode(element);
-            //newNode->element = element;
-            //set next to null
-            newNode->next = nullptr;
-            //set prev to tail
-            newNode->prev = tail;
-            //set tail to newNode
-            tail = newNode;
-        }
+                head = tail = newNode;
+        } 
         else
         {
-            head = new listNode(element);
-            //head->element = element;
-            head->prev = nullptr;
-            tail = head;
-            head->next = tail;
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
         }
-        
+
+            
     }
 
     //mergesort function
