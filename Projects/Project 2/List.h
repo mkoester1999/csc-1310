@@ -48,6 +48,12 @@ private:
     //comparing Ts with *(node->value)
     typename List<T>::listNode* mergesort(listNode* node1, listNode* node2)
     {
+        //base case
+        if(!node1 || node1 == node2 )
+        {
+            return node1;
+        }
+
         listNode* midNode = split(node1, node2);
 
         node1 = mergesort(node1, midNode);
@@ -68,7 +74,7 @@ private:
         if(!node2) return node1;
 
         //if node1 is smaller than node2
-        if (node1->element.getPopulation() < node2->element.getPopulation())
+        if (node1->element.getPopulation() >= node2->element.getPopulation())
         {   
             //recursively call merge to get node1->next
             node1->next = merge(node1->next, node2);
