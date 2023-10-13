@@ -8,25 +8,60 @@
 
 #ifndef list_h
 #define list_h
+#include<iostream>
+
+//using namespace std;
 
 
-using namespace std;
-
-template<class T>
-struct listNode
-{
-    T element;
-    listNode<T> *next;
-    listNode<T> *prev;
-};
 
 template<class T>
 class List
 {
-public:
+private:
 
-    listNode<T>* head;
-    listNode<T>* tail;
+   
+    struct listNode
+    {
+        T element;
+        listNode* next;
+        listNode* prev;
+        listNode(const T& el): element(el), next(nullptr), prev(nullptr) {}
+    };
+    listNode* head;
+    listNode* tail;
+
+     
+    
+    //print function
+    //prints out every element of list after the parameter node.
+    //parameters: listNode
+    //returns: void
+    //comparing Ts with *(node->value)
+    void print(listNode* node);
+
+    //mergesort function overload
+    //manages recursive calls for mergesort function
+    //parameters: listNode, listNode
+    //returns: Node<T>*
+    //comparing Ts with *(node->value)
+    listNode* mergesort(listNode* node1, listNode* node2);
+    
+    //merge function
+    //merges two sorted lists
+    //parameters: listNode*, listNode*
+    //returns: listNode *
+    //comparing Ts with *(node->value)
+    listNode* merge(listNode* node1, listNode* node2);
+
+    //split function
+    //subdivide list partition into 2 new lists
+    //paramters: listNode*, listNode*
+    //returns: listNode*
+    //comparing Ts with *(node->value)
+    listNode* split(listNode* node1, listNode* node2);
+
+
+public:
 
     //list constructor
     //parameters: none
@@ -63,45 +98,10 @@ public:
     //extra credit
     //swap function
     //swaps two nodes
-    //parameters: listNode<T>*, listNode<T>*
+    //parameters: listNode*, listNode*
     //called by selectionSort
-    //void swap(listNode<T>*, listNode<T>*);
-
-private:
-    //print function
-    //prints out every element of list after the parameter node.
-    //parameters: listNode<T>
-    //returns: void
-    //comparing Ts with *(node->value)
-    void print(listNode<T>* node);
-
-    //mergesort function overload
-    //manages recursive calls for mergesort function
-    //parameters: listNode<T>, listNode<T>
-    //returns: Node<T>*
-    //comparing Ts with *(node->value)
-    listNode<T>* mergesort(listNode<T>* node1, listNode<T>* node2);
+    //void swap(listNode*, listNode*);
     
-    //merge function
-    //merges two sorted lists
-    //parameters: listNode<T>*, listNode<T>*
-    //returns: listNode<T> *
-    //comparing Ts with *(node->value)
-    listNode<T>* merge(listNode<T>* node1, listNode<T>* node2);
-
-    //split function
-    //subdivide list partition into 2 new lists
-    //paramters: listNode<T>*, listNode<T>*
-    //returns: listNode<T>*
-    //comparing Ts with *(node->value)
-    listNode<T>* split(listNode<T>* node1, listNode<T>* node2);
-
-    
-
-    
-    
-
-
 };
 
 template<class T>
@@ -118,7 +118,7 @@ void List<T>::append(T element)
     if(head)
     {
         //make new node pointer with value of element
-        listNode<T>* newNode = new listNode<T>;
+        listNode* newNode = new listNode;
         newNode->element = element;
         //set next to null
         newNode->next = nullptr;
@@ -129,7 +129,7 @@ void List<T>::append(T element)
     }
     else
     {
-        head = new listNode<T>;
+        head = new listNode;
         head->element = element;
         head->next = nullptr;
         head->prev = nullptr;
@@ -144,7 +144,7 @@ void List<T>::append(T element)
 template<class T>
 void List<T>::print()
 {   
-    listNode<T>* temp = head; //temp ptr to head
+    listNode* temp = head; //temp ptr to head
     //checks to see if head is null, if not, prints out list
     if(head)
     {
@@ -159,11 +159,11 @@ delete temp; //free up null ptr
 
 //overloaded print function (private)
 //prints out node element
-//parameters: listNode<T>*
+//parameters: listNode*
 template<class T>
-void List<T>::print(listNode<T>* node)
+void List<T>::print(listNode* node)
 {
-    cout << node->element << endl;
+    std::cout << node->element << std::endl;
 }
 //this needs to be in descending order
 template<class T>
@@ -171,7 +171,7 @@ void List<T>::mergesort()
 {
     if (head && tail)
     {
-        listNode<T>* midNode = split(head, tail);
+        listNode* midNode = split(head, tail);
         head = mergesort(head, midNode);
         midNode = mergesort(midNode, tail);
     }
@@ -179,9 +179,9 @@ void List<T>::mergesort()
 }
 
 template<class T>
-listNode<T>* List<T>::mergesort(listNode<T>* node1, listNode<T>* node2)
+typename List<T>::listNode* List<T>:: mergesort(listNode* node1, listNode* node2)
 {
-    listNode<T>* midNode = split(node1, node2);
+    listNode* midNode = split(node1, node2);
 
     node1 = mergesort(node1, midNode);
     midNode = mergesort(midNode, tail);
@@ -190,7 +190,7 @@ listNode<T>* List<T>::mergesort(listNode<T>* node1, listNode<T>* node2)
 }
 
 template<class T>
-listNode<T>* List<T>::merge(listNode<T>* node1, listNode<T>* node2)
+typename List<T>::listNode* List<T>::merge(listNode* node1, listNode* node2)
 {
     //check if lists are empty
     if(!node1) return node2;
@@ -222,7 +222,7 @@ listNode<T>* List<T>::merge(listNode<T>* node1, listNode<T>* node2)
 }
 
 template<class T>
-listNode<T>* List<T>::split(listNode<T>* _head, listNode<T>* _tail)
+typename List<T>::listNode* List<T>::split(listNode* _head, listNode* _tail)
 {
     //traverse from both sides of list to find middle node
     while (_head!=_tail || _tail->prev!=_head)
@@ -230,7 +230,7 @@ listNode<T>* List<T>::split(listNode<T>* _head, listNode<T>* _tail)
         _head = _head->next;
         _tail = _tail->prev;
     }
-    listNode<T>* midNode = _head;
+    listNode* midNode = _head;
     midNode->next = nullptr;
     return midNode;
 }
@@ -239,7 +239,7 @@ listNode<T>* List<T>::split(listNode<T>* _head, listNode<T>* _tail)
 template<class T>
 List<T>::~List()
 {
-    listNode<T>* temp = head;
+    listNode* temp = head;
     while(temp != nullptr)
     {
         head = head->next;
