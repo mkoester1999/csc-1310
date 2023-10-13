@@ -117,8 +117,8 @@ void List<T>::append(T element)
     //check if list is empty
     if(head)
     {
-        //make new node with value of element
-        listNode* newNode = new listNode;
+        //make new node pointer with value of element
+        listNode<T>* newNode = new listNode<T>;
         newNode->element = element;
         //set next to null
         newNode->next = nullptr;
@@ -129,7 +129,7 @@ void List<T>::append(T element)
     }
     else
     {
-        head = new listNode;
+        head = new listNode<T>;
         head->element = element;
         head->next = nullptr;
         head->prev = nullptr;
@@ -144,7 +144,7 @@ void List<T>::append(T element)
 template<class T>
 void List<T>::print()
 {   
-    listNode* temp = head; //temp ptr to head
+    listNode<T>* temp = head; //temp ptr to head
     //checks to see if head is null, if not, prints out list
     if(head)
     {
@@ -169,13 +169,13 @@ void List<T>::print(listNode<T>* node)
 template<class T>
 void List<T>::mergesort()
 {
-    if (!head || !tail)
+    if (head && tail)
     {
-        return nullptr;
+        listNode<T>* midNode = split(head, tail);
+        head = mergesort(head, midNode);
+        midNode = mergesort(midNode, tail);
     }
-    listNode<T>* midNode = split(head, tail)
-    head = mergesort(head, midNode);
-    midNode = mergesort(midNode, tail);
+    
 }
 
 template<class T>
@@ -239,7 +239,7 @@ listNode<T>* List<T>::split(listNode<T>* _head, listNode<T>* _tail)
 template<class T>
 List<T>::~List()
 {
-    listNode* temp = head;
+    listNode<T>* temp = head;
     while(temp != nullptr)
     {
         head = head->next;
