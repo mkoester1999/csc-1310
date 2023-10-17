@@ -15,9 +15,9 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/DELL/Documents/GitHub/csc-1310/Projects/Project 2",
-      "program": "c:/Users/DELL/Documents/GitHub/csc-1310/Projects/Project 2/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "/home/mitchell/Documents/csc-1310/Projects/Project 2",
+      "program": "/home/mitchell/Documents/csc-1310/Projects/Project 2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
