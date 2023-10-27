@@ -16,6 +16,26 @@ hashTable::hashTable(int size)
 
 
 }
+//hashTable destructor
+//parameters: none
+//returns: none
+hashTable::~hashTable()
+{
+	for(int i = 0; i < tableSize; i++)
+	{
+		if(hashArray[i])
+		{
+			entry* temp = hashArray[i];
+			while(temp)
+			{
+				entry* next = temp->next;
+				delete temp;
+				temp = next;
+			}
+		}
+	}
+	delete[] hashArray;
+}
 
 //don't touch this!
 int hashTable::hash(string key)
