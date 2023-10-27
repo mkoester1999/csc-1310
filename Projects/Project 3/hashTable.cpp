@@ -123,7 +123,9 @@ bool hashTable::validateLogin(string username, string hashedPass)
 //parameters: string username, string hashedpassword
 //returns bool
 bool hashTable::removeUser(string username, string hashedPassword)
-{
+{	
+	//check is hashtable is empty
+	if(!hashArray) return false;
 	//hash username
 	int hashIndex = hash(username);
 	//check if the username at hashed index is equal to the username & password passed

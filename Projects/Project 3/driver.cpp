@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "sha256.h"
+#include "hashTable.h"
 //include your hash table---------------------------------------------------------------------------------------------------
 
 using namespace std;
