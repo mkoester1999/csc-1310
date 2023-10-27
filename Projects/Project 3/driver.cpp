@@ -13,20 +13,25 @@ int main()
 	int numUsers;
 	string user, pwd, salt;
 	string username, password;
+	hashTable *userTable;
 	
-	if(file.is_open()) {
-	file >> numUsers;
-	file.ignore(1, '\n');
-	//dynamically allocate your hash table
-	new hashTable(numUsers);
-	
-	while(getline(file, user))
+	if(file.is_open()) 
 	{
-		getline(file, pwd);
-		//generate a salt and add the new user to your table
-		//hashTable.addEntry(user, salt, pwd);
+		file >> numUsers;
+		file.ignore(1, '\n');
+		//dynamically allocate your hash table
+		userTable = new hashTable(numUsers);
 		
-	}}
+		while(getline(file, user))
+		{
+			getline(file, pwd);
+			//generate a salt and add the new user to your table
+			//call getSalt, passing them into addEntry
+			string salt = userTable->getSalt(user);
+			userTable->addEntry(user, salt, pwd);
+
+		}
+	}
 	
 	do
 	{
@@ -50,8 +55,10 @@ int main()
 					cin >> username;
 					cout << "enter your password:  ";
 					cin >> password;
+					//hash password
+					password= userTable->getSalt(password);
 					
-					if()//check if the user's credentials are correct-----------------------------------
+					if(userTable->validateLogin(username,password))//check if the user's credentials are correct-----------------------------------
 						cout << "login successful\n";
 					else
 						cout << "invalid credentials\n";
