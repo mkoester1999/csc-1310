@@ -2,7 +2,6 @@
 #include <fstream>
 #include "sha256.h"
 #include "hashTable.h"
-//include your hash table---------------------------------------------------------------------------------------------------
 
 using namespace std;
 
@@ -18,12 +17,15 @@ int main()
 	if(file.is_open()) {
 	file >> numUsers;
 	file.ignore(1, '\n');
-	//dynamically allocate your hash table-------------------------------------------------------------------------------
+	//dynamically allocate your hash table
+	new hashTable(numUsers);
 	
 	while(getline(file, user))
 	{
 		getline(file, pwd);
-		//generate a salt and add the new user to your table--------------------------------------------------------
+		//generate a salt and add the new user to your table
+		//hashTable.addEntry(user, salt, pwd);
+		
 	}}
 	
 	do
