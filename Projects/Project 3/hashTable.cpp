@@ -152,7 +152,29 @@ bool hashTable::removeUser(string username, string hashedPassword)
 
     return false;
 }
+hasTable::entry * hashTable::getEntry(string key)
+{
+	//hash string 
+	int hashIndex = hash(key);
 
+	//check if there is an entry at hashIndex
+	if(!hashArray[hashIndex]) return nullptr;
+
+	if(hashArray[hashIndex]->getUsername == key) return hashArray[hashIndex];
+	else if(hashArray[hashIndex]->next)
+	{
+		//iterate through list checking for username
+		entry * temp = hashArray[hashIndex];
+		while(temp && temp->getUsername != key)
+		{
+			temp = temp->next;				
+		}
+		//temp either is set to the correct entry or reached the end of the list and is null
+		return temp;
+	}
+
+	
+}
 
 //entry class functions-------------------------------------------------
 hashTable::entry::entry(string _uname, string _salt, string _passedHash)
