@@ -96,6 +96,46 @@ bool hashTable::validateLogin(string username, string hashedPass)
 		
 	}
 	return false;
+
+}
+
+//remove user from hashTable
+//parameters: string username, string hashedpassword
+//returns bool
+bool hashTable::removeUser(string username, string hashedPassword)
+{
+	//hash username
+	int hashIndex = hash(username);
+	//check if the username at hashed index is equal to the username & password passed
+	if (hashArray[hashIndex] && hashArray[hashIndex]->getUsername() == username && hashArray[hashIndex]->getHashedpwd() == hashedPassword)
+	{
+		//delete entry
+		delete hashArray[hashIndex];
+		//set entry to null
+		hashArray[hashIndex] = nullptr;
+		return true;
+	}
+	//else check if one of the next values at the hashIndex equals username & password
+	else if (hashArray[hashIndex] && hashArray[hashIndex]->next)
+	{
+		//make temp entry for traversal
+		entry * temp = hashArray[hashIndex];
+		//iterate through list until entry is null or temp->username = username and hashed password equals hashed pass
+		while(temp)
+		{
+			if(temp->getUsername() == username && temp->getHashedpwd() == hashedPassword)
+			{
+				//delete entry
+				delete temp;
+				//set entry to null
+				temp = nullptr;
+				return true;
+			}
+			temp = temp->next;
+		}
+		
+	}
+	return false;
 }
 
 //entry class functions-------------------------------------------------
