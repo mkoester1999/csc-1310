@@ -66,6 +66,7 @@ void hashTable::addEntry(string username, string salt, string passHash)
 		{
 			temp = temp->next;
 		}
+		//set next entry to user
 		temp->next = user;
 	}
 	
