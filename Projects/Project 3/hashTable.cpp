@@ -122,43 +122,37 @@ bool hashTable::validateLogin(string username, string hashedPass)
 //remove user from hashTable
 //parameters: string username, string hashedpassword
 //returns bool
-bool hashTable::removeUser(string username, string hashedPassword)
-{	
-	//check is hashtable is empty
-	if(!hashArray) return false;
-	//hash username
-	int hashIndex = hash(username);
-	//check if the username at hashed index is equal to the username & password passed
-	if (hashArray[hashIndex] && hashArray[hashIndex]->getUsername() == username && hashArray[hashIndex]->getHashedpwd() == hashedPassword)
-	{
-		//delete entry
-		delete hashArray[hashIndex];
-		//set entry to null
-		hashArray[hashIndex] = nullptr;
-		return true;
-	}
-	//else check if one of the next values at the hashIndex equals username & password
-	else if (hashArray[hashIndex] && hashArray[hashIndex]->next)
-	{
-		//make temp entry for traversal
-		entry * temp = hashArray[hashIndex];
-		//iterate through list until entry is null or temp->username = username and hashed password equals hashed pass
-		while(temp)
-		{
-			if(temp->getUsername() == username && temp->getHashedpwd() == hashedPassword)
+bool hashTable::removeUser(string username, string hashedPassword) 
+{
+    int hashIndex = hash(username);
+
+    if (hashArray[hashIndex]) {
+        entry* current = hashArray[hashIndex];
+        entry* previous = nullptr;
+
+        while (current) {
+            if (current->getUsername() == username && current->getHashedpwd() == hashedPassword) 
 			{
-				//delete entry
-				delete temp;
-				//set entry to null
-				temp = nullptr;
-				return true;
-			}
-			temp = temp->next;
-		}
-		
-	}
-	return false;
+                if (previous) {
+                    // If it's not the first element in the list
+                    previous->next = current->next;
+                } else {
+                    // If it's the first element in the list
+                    hashArray[hashIndex] = current->next;
+                }
+
+                delete current;
+                return true;
+            }
+
+            previous = current;
+            current = current->next;
+        }
+    }
+
+    return false;
 }
+
 
 //entry class functions-------------------------------------------------
 hashTable::entry::entry(string _uname, string _salt, string _passedHash)
