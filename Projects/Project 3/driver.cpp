@@ -18,14 +18,16 @@ int main()
 	file >> numUsers;
 	file.ignore(1, '\n');
 	//dynamically allocate your hash table
-	new hashTable(numUsers);
+	hashTable *userTable = new hashTable(numUsers);
 	
 	while(getline(file, user))
 	{
 		getline(file, pwd);
 		//generate a salt and add the new user to your table
-		//hashTable.addEntry(user, salt, pwd);
-		
+		//call getSalt, passing them into addEntry
+		string salt = userTable->getSalt(user);
+		userTable->addEntry(user, salt, pwd);
+
 	}}
 	
 	do
