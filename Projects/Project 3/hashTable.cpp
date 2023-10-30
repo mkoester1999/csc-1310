@@ -66,6 +66,7 @@ string hashTable::getSalt(string username)
 
 void hashTable::addEntry(string username, string salt, string passHash)
 {
+	tableSize++;
 	entry* user = new entry(username, salt, passHash);
 
 	//generate hash for the index 
@@ -142,6 +143,7 @@ bool hashTable::removeUser(string username, string hashedPassword)
                 }
 
                 delete current;
+				tableSize--;
                 return true;
             }
 
@@ -154,27 +156,31 @@ bool hashTable::removeUser(string username, string hashedPassword)
 }
 hashTable::entry * hashTable::getEntry(string key)
 {
-	//hash string 
-	int hashIndex = hash(key);
-
-	//check if there is an entry at hashIndex
-	if(!hashArray[hashIndex]) return nullptr;
-
-	if(hashArray[hashIndex]->getUsername() == key) return hashArray[hashIndex];
-
-	//if there were prior collisions
-	else if(hashArray[hashIndex]->next)
+	//check if table is empty
+	if(tableSize>0)
 	{
-		//iterate through list checking for username
-		entry * temp = hashArray[hashIndex];
-		while(temp && temp->getUsername() != key)
-		{
-			temp = temp->next;				
-		}
-		//temp either is set to the correct entry or reached the end of the list and is null
-		return temp;
-	}
+		//hash string 
+		int hashIndex = hash(key);
 
+		//check if there is an entry at hashIndex
+		if(!hashArray[hashIndex]) return nullptr;
+
+		if(hashArray[hashIndex]->getUsername() == key) return hashArray[hashIndex];
+
+		//if there were prior collisions
+		else if(hashArray[hashIndex]->next)
+		{
+			//iterate through list checking for username
+			entry * temp = hashArray[hashIndex];
+			while(temp && temp->getUsername() != key)
+			{
+				temp = temp->next;				
+			}
+			//temp either is set to the correct entry or reached the end of the list and is null
+			return temp;
+		}
+	}
+	return nullptr;
 	
 }
 

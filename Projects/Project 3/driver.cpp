@@ -27,7 +27,7 @@ int main()
 			getline(file, pwd);
 			//generate a salt and add the new user to your table
 			//call getSalt, passing them into addEntry
-			string salt = userTable->getSalt(user);
+			string salt = userTable->generateSalt();
 			userTable->addEntry(user, salt, pwd);
 
 		}
@@ -56,7 +56,7 @@ int main()
 					cout << "enter your password:  ";
 					cin >> password;
 					//hash password
-					password= userTable->getSalt(password);
+					password= sha256(password+userTable->getSalt(username));
 					
 					if(userTable->validateLogin(username,password))//check if the user's credentials are correct-----------------------------------
 						cout << "login successful\n";
@@ -71,6 +71,10 @@ int main()
 					cin >> password;
 					
 					//generate a salt for the new user and add the user to the table--------------------
+					salt = userTable->generateSalt();
+
+					//add entry
+					userTable->addEntry(username, salt, sha256(password+salt));
 					
 					break;
 					
@@ -79,14 +83,15 @@ int main()
 					cout << "enter your password:  ";
 					cin >> password;
 					
-					if()//remove the user from the table and check if they were removed successfully----
+					if(userTable->removeUser(username, sha256(password + userTable->getSalt(username))))// the user from the table and check if they were removed successfully----
 						cout << "user removed successfully.\n";
 					else
-						cout << "invalid credentials, cannot remove user.\n";
+						cout << "invalid credentials, cannot remove user.\n";	
 					break;
 					
 			case 4:	cout << "goodbye" << endl;
 					//delete the hash table-------------------------------------------------------------
+					delete userTable;
 					break;
 					
 		}
