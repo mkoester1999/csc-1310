@@ -97,7 +97,7 @@ void hashTable::addEntry(string username, string salt, string passHash)
 bool hashTable::validateLogin(string username, string hashedPass)
 {
 	//hash username
-	int hashIndex = hash(username);
+	/*int hashIndex = hash(username);
 	//check if the username at hashed index is equal to the username & password passed
 	if (hashArray[hashIndex] && hashArray[hashIndex]->getUsername() == username && hashArray[hashIndex]->getHashedpwd() == hashedPass)
 	{
@@ -116,7 +116,16 @@ bool hashTable::validateLogin(string username, string hashedPass)
 		}
 		
 	}
+	return false;*/
+
+	entry* user = getEntry(username);
+
+	if(user)
+	{
+		if (hashedPass)
+	}
 	return false;
+
 
 }
 
