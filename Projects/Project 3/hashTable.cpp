@@ -96,34 +96,11 @@ void hashTable::addEntry(string username, string salt, string passHash)
 
 bool hashTable::validateLogin(string username, string hashedPass)
 {
-	//hash username
-	/*int hashIndex = hash(username);
-	//check if the username at hashed index is equal to the username & password passed
-	if (hashArray[hashIndex] && hashArray[hashIndex]->getUsername() == username && hashArray[hashIndex]->getHashedpwd() == hashedPass)
-	{
-		return true;
-	}
-	//else check if one of the next values at the hashIndex equals username & password
-	else if (hashArray[hashIndex] && hashArray[hashIndex]->next)
-	{
-		//make temp entry for traversal
-		entry * temp = hashArray[hashIndex];
-		//iterate through list until entry is null or temp->username = username and hashed password equals hashed pass
-		while(temp)
-		{
-			if(temp->getUsername() == username && temp->getHashedpwd() == hashedPass) return true;
-			temp = temp->next;
-		}
-		
-	}
-	return false;*/
 
 	entry* user = getEntry(username);
 
-	if(user)
-	{
-		if (hashedPass)
-	}
+	if(user && user->getHashedpwd() == hashedPass) return true;
+
 	return false;
 
 
