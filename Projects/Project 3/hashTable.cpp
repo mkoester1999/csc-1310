@@ -60,6 +60,8 @@ string hashTable::generateSalt()
 string hashTable::getSalt(string username)
 {
 	entry* user = getEntry(username);
+
+	if(!user) return "";
 	return user->getSalt();
 
 }
