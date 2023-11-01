@@ -1,3 +1,9 @@
+/*Title   	  Header for Program 3
+  Authors     Bryant & Mitchell Koester
+  Purpose     Hashing Passwords
+  Date 		  Nov 3th 2023
+  */
+
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 #include <string>

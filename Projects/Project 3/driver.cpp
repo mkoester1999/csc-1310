@@ -1,3 +1,9 @@
+/*Title   	  Driver for Program 3
+  Authors     Bryant & Mitchell Koester
+  Purpose     Hashing Passwords
+  Date 		  Nov 3th 2023
+  */
+
 #include <iostream>
 #include <fstream>
 #include "sha256.h"
