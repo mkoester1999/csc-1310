@@ -107,8 +107,9 @@ bool hashTable::validateLogin(string username, string hashedPass)
 	//call getentry and set to new entry pointer
 	entry* user = getEntry(username);
 
+	//check if the hashed password matches the stored hashed password
 	if(user && user->getHashedpwd() == hashedPass) return true;
-
+	//else return false
 	return false;
 
 
