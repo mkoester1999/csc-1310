@@ -104,7 +104,7 @@ void hashTable::addEntry(string username, string salt, string passHash)
 
 bool hashTable::validateLogin(string username, string hashedPass)
 {
-
+	//call getentry and set to new entry pointer
 	entry* user = getEntry(username);
 
 	if(user && user->getHashedpwd() == hashedPass) return true;
