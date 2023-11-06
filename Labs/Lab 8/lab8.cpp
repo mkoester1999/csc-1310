@@ -1,3 +1,9 @@
+/*
+Title: Lab8.cpp
+Author: Mitchell Koester
+Date: 11/6/2023
+Purpose: driver for BST
+*/
 #include "BST.h"
 #include <iostream>
 #include <stdlib.h>

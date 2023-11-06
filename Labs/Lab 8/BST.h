@@ -1,3 +1,9 @@
+/*
+Title: Lab8.h
+Author: Mitchell Koester
+Date: 11/6/2023
+Purpose: Header and implementation for BST class
+*/
 #ifndef BST_H
 #define BST_H
 
@@ -15,6 +21,7 @@ class BST
 		};
 		treeNode* root;
 
+		//copy constructor
 		void copy(treeNode*& newTreeNode, treeNode* oldTreeNode)
 		{
 			//base case. If oldTreeNode is null, set newTreeNode to null
@@ -31,6 +38,10 @@ class BST
 				
 			}
 		}
+		//insert function
+		//recursively traverses the tree and inserts the new node in the correct place
+		//parameters: treeNode&* oldNode, treeNode* newNode
+		//returns void
 		void insert(treeNode*& nodePtr, treeNode* newNode)
 		{
 			//if the node is empty, insert at the current position
@@ -43,6 +54,10 @@ class BST
 			else
 				insert(nodePtr->right, newNode);
 		}
+		//displayInOrder function
+		//recursively traverses the tree and prints out the values of the nodes
+		//parameters: treeNode*
+		//returns void
 		void displayInOrder(treeNode* nodePtr) const
 		{
 			//base case if the node is empty
@@ -52,6 +67,10 @@ class BST
 			cout << nodePtr->value << " ";
 			displayInOrder(nodePtr->right);
 		}
+		//destroySubTree function
+		//recursively traverses the tree and deletes the nodes
+		//parameters: treeNode*
+		//returns void
 		void destroySubTree(treeNode* nodePtr)
 		{
 			//base case if the node is empty
@@ -65,6 +84,7 @@ class BST
 		}
 
 	public:
+		//default constructor
 		BST()
 		{
 			root = NULL;
@@ -75,12 +95,16 @@ class BST
 			root = NULL;
 			copy(root, tree.root);
 		}
-
+		//destructor
 		~BST()
 		{
 			destroySubTree(root);
 		}
 
+		//insertNode function
+		//starts inserting at root and calls insert helper function
+		//parameters: int
+		//returns void
 		void insertNode(int value)
 		{
 			treeNode* newNode = new treeNode;
@@ -90,6 +114,10 @@ class BST
 			//insert treenode into the tree
 			insert(root, newNode);
 		}
+		//display function
+		//takes root node and calls displayInOrder helper function
+		//parameters: none
+		//returns void
 		void display()
 		{
 			displayInOrder(root);
