@@ -11,7 +11,15 @@ using namespace std;
 class markovList
 {
 	private:
+		struct edge
+		{
+			string word;
+			int weight;
+			edge* next;
+		};
+
 		map<string, edge*> corpus;
+		int corpusSize;	
 	public:
 		markovList(const char*);
 		~markovList();
@@ -46,7 +54,10 @@ markovList::markovList(const char* filename)
 			splitter.str(word);
 			splitter >> word >> weight;
 			//stick word and weight on the node you've just allocated---
-			//make sure your new node is attached to the list---
+			newEdge->word = word;
+			newEdge->weight = weight;
+			//make sure your new node is attached to the list--- key might need to be word instead of index. Not sure.
+			corpus.insert(pair<string, edge*>(index, newEdge));
 		}
 	}}
 }
@@ -61,6 +72,24 @@ string markovList::generate(int length)
 	map<string, edge*>::iterator it = corpus.begin();	//initialize an iterator to find a random node in the next line
 	advance(it,rand() % corpusSize);	//this grabs a random node from your corpus as a starting point
 //write the rest of this
+	float randomNode;
+	for (int i = 0; i<length; i++)
+	{
+		randomNode = (float)rand()/RAND_MAX;
+		//compare randomNode to every edge weight in the list
+		//iterate through corpus starting at it
+		edge* tempEdge = it->second;
+		while(tempEdge)
+		{
+			if (randomNode < tempEdge->weight)
+			{
+				return tempEdge->word;
+			}
+			tempEdge = tempEdge->next;
+		}
+		//return empty string if we didn't find a weight smaller than the ranndom number
+		return "";
+	}
 }
 
 
