@@ -72,23 +72,33 @@ string markovList::generate(int length)
 	map<string, edge*>::iterator it = corpus.begin();	//initialize an iterator to find a random node in the next line
 	advance(it,rand() % corpusSize);	//this grabs a random node from your corpus as a starting point
 //write the rest of this
+	//make randomnode float so it's not initialized every time the loop runs
 	float randomNode;
+	string returnString = "";
 	for (int i = 0; i<length; i++)
 	{
 		randomNode = (float)rand()/RAND_MAX;
 		//compare randomNode to every edge weight in the list
 		//iterate through corpus starting at it
 		edge* tempEdge = it->second;
+		float sum = 0;
 		while(tempEdge)
 		{
-			if (randomNode < tempEdge->weight)
+			if (randomNode < tempEdge->weight + sum)
 			{
-				return tempEdge->word;
+				//add the word to the return string
+				returnString = returnString + " " + tempEdge->word;
+				break;
 			}
-			tempEdge = tempEdge->next;
+			//increase sum by the tempEdge 
+			else
+			{
+				sum += tempEdge->weight;
+				tempEdge = tempEdge->next;
+			}
+			
 		}
-		//return empty string if we didn't find a weight smaller than the ranndom number
-		return "";
+		return returnString;
 	}
 }
 
