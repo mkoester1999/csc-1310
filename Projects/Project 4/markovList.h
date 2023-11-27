@@ -29,6 +29,7 @@ class markovList
 
 markovList::markovList(const char* filename)
 {
+	corpusSize = 0;
 	ifstream file(filename);
 	stringstream parser, splitter;
 	string line, index, word;
@@ -47,6 +48,7 @@ markovList::markovList(const char* filename)
 		parser << line;
 		getline(parser, index,',');	//pulls the first word of the line, which is the node for which we're making a list of neighbors
 		//initialize an empty list at the index---
+		edge* currentEdge = nullptr;
 		while(getline(parser, word, ','))
 		{
 			//allocate a new node in the edge list---
@@ -54,10 +56,23 @@ markovList::markovList(const char* filename)
 			splitter.str(word);
 			splitter >> word >> weight;
 			//stick word and weight on the node you've just allocated---
+			newEdge = new edge;
 			newEdge->word = word;
 			newEdge->weight = weight;
+			newEdge->next = nullptr;
 			//make sure your new node is attached to the list--- key might need to be word instead of index. Not sure.
-			corpus.insert(pair<string, edge*>(index, newEdge));
+			
+			//check if list is empty
+			if(!currentEdge)
+			{
+				corpus[index] = newEdge;
+				currentEdge = newEdge;
+			}
+			else
+			{
+				currentEdge->next = newEdge;
+				currentEdge = newEdge;
+			}
 		}
 	}}
 }
@@ -65,6 +80,22 @@ markovList::markovList(const char* filename)
 markovList::~markovList()
 {
 //write this
+	//iterate through corpus
+	map<string, edge*>::iterator it;
+	for (it = corpus.begin(); it != corpus.end(); it++)
+	{
+		//iterate through the adjacency list
+		edge* tempEdge = it->second;
+		while(tempEdge)
+		{
+			//make new edge for iterating and delete old edge
+			edge* tempNext = tempEdge->next;
+			delete tempEdge;
+			tempEdge = tempNext;
+		}
+	}
+	//clear corpus
+	corpus.clear();
 }
 		
 string markovList::generate(int length)
@@ -90,9 +121,9 @@ string markovList::generate(int length)
 				returnString = returnString + " " + tempEdge->word;
 				break;
 			}
-			//increase sum by the tempEdge 
 			else
 			{
+				//increase sum by the tempEdge 
 				sum += tempEdge->weight;
 				tempEdge = tempEdge->next;
 			}
