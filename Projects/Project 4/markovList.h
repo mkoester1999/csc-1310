@@ -14,7 +14,7 @@ class markovList
 		struct edge
 		{
 			string word;
-			int weight;
+			float weight;
 			edge* next;
 		};
 
@@ -119,7 +119,8 @@ string markovList::generate(int length)
 			{
 				//add the word to the return string
 				returnString = returnString + " " + tempEdge->word;
-				break;
+				//update the iterator
+				tempEdge = tempEdge->next;
 			}
 			else
 			{
