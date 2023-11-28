@@ -1,7 +1,13 @@
+/*
+Mitchell Koester
+Lab 10 ArrayMinHeap header and implementation
+11/28/23
+*/
 #ifndef HEAP_h
 #define HEAP_h
 
 #include "Creature.h"
+#include<cmath>
 
 class ArrayMinHeap
 {
@@ -176,6 +182,11 @@ public:
         {
             heapArray[i].printCreatureToFile("savedCreatures.txt");
         }
+    }
+
+    int getHeight()
+    {
+        return ceil(log2(heap_size + 1));
     }
 };
 
