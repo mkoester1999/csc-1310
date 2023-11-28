@@ -1,0 +1,8 @@
+bob
+a bob creature
+0
+10
+rat
+eww
+1
+1

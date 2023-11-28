@@ -1,22 +1,23 @@
 #include "Creature.h"
-#include "CreatureBinaryTree.h"
+#include "ArrayMinHeap.h"
 #include <cctype>
 #include <iostream>
 #include <fstream>
 using namespace std;
 
-void enterMagicalCreature(CreatureBinaryTree*);
-void enterMagicalCreatureFromFile(CreatureBinaryTree*);
-void deleteCreature(CreatureBinaryTree*);
-void printCreatures(CreatureBinaryTree*);
-void saveCreaturesToFile(CreatureBinaryTree*);
+void enterMagicalCreature(ArrayMinHeap*);
+void enterMagicalCreatureFromFile(ArrayMinHeap*);
+void deleteCreature(ArrayMinHeap*);
+void printCreatures(ArrayMinHeap*);
+void saveCreaturesToFile(ArrayMinHeap*);
+void deleteCreature(ArrayMinHeap*);
 
 int main()
 {
 	int choice;
 	char response;
 	
-	CreatureBinaryTree creatureTree;
+	ArrayMinHeap creatureTree(100);
 		
 	do{
 	
@@ -24,11 +25,12 @@ int main()
 		cout << "\t1.  Enter Magical Creature\n";
 		cout << "\t2.  List/Print Creatures.\n";
 		cout << "\t3.  End Program.\n";
-		cout << "\tEnter 1, 2, or 3.\n";
+		cout << "\t4.  Remove Creature.\n";
+		cout << "\tEnter 1, 2, 3, or 4.\n";
 		cout << "CHOICE:  ";
 		cin >> choice;
 		
-		while(choice < 1 || choice > 3)
+		while(choice < 1 || choice > 4)
 		{
 			cout << "\nYour choice was invalid.  Choose a number 1 through 3.\n";
 			cout << "CHOICE: ";
@@ -66,6 +68,8 @@ int main()
 					if(tolower(response) == 'y')
 						saveCreaturesToFile(&creatureTree);
 					cout << "\n\nGOODBYE!\n";
+			case 4: deleteCreature(&creatureTree);
+					
 					
 		} //end of switch
 		
@@ -74,7 +78,7 @@ int main()
 	return 0;
 } //end of main
 
-void enterMagicalCreature(CreatureBinaryTree *creatureTree)
+void enterMagicalCreature(ArrayMinHeap *creatureTree)
 {
 	string name, desc;
 	float cost;
@@ -101,10 +105,10 @@ void enterMagicalCreature(CreatureBinaryTree *creatureTree)
 		cin >> cost;
 	
 		//create a creature
-		Creature newCreature(name, desc, dangerous, cost); 
+		Creature* newCreature = new Creature(name, desc, dangerous, cost); 
 		
 		//insert creature in the tree
-		creatureTree->insertNode(newCreature);
+		creatureTree->insert(newCreature);
 
 		cout << "\n\nWant to add more creatures? (y or n)  ";
 		cin >> response;
@@ -112,7 +116,7 @@ void enterMagicalCreature(CreatureBinaryTree *creatureTree)
 	}while(tolower(response) == 'y');	
 }
 
-void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
+void enterMagicalCreatureFromFile(ArrayMinHeap *creatureTree)
 {
 	ifstream inputFile;
 	char filename[100];
@@ -133,8 +137,7 @@ void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
 		bool dangerous;
 		char response;
 		int numCreatures = 0;
-		//load creatures from file
-					
+		//load creatures from file					
 		//read first creature name to see if one exists
 		getline(inputFile, temp);
 
@@ -148,10 +151,10 @@ void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
 			inputFile.ignore();
 			
 			//create a creature
-			Creature newCreature(name, desc, dangerous, cost); 
+			Creature *newCreature = new Creature(name, desc, dangerous, cost); 
 
 			//insert creature in the tree
-			creatureTree->insertNode(newCreature);
+			creatureTree->insert(newCreature);
 			
 			numCreatures++;
 			//start reading next line with new creature.						
@@ -167,17 +170,17 @@ void enterMagicalCreatureFromFile(CreatureBinaryTree *creatureTree)
 	}
 }
 
-void printCreatures(CreatureBinaryTree *creatureTree)
+void printCreatures(ArrayMinHeap *creatureTree)
 {
-	creatureTree->fullDisplayInOrder();
+	creatureTree->display();
 }
 
-void saveCreaturesToFile(CreatureBinaryTree *creatureTree)
+void saveCreaturesToFile(ArrayMinHeap *creatureTree)
 {
 	string filename;
 	Creature tempCreature;
 	
-	if(creatureTree->getNumNodes() == 0)
+	if(creatureTree->getNumberOfNodes() == 0)
 	{
 		cout << "------------------------------------------------------------------------" << endl;
 		cout << "THERE ARE NO CREATURES AT YOUR ZOO!\n";
@@ -187,4 +190,16 @@ void saveCreaturesToFile(CreatureBinaryTree *creatureTree)
 	{
 		creatureTree->saveToFile();
 	}
+}
+
+//deleteCreature function
+//removes creature from heap
+//parameters: reference to creature being deleted
+//returns void
+void deleteCreature(ArrayMinHeap* creatureTree)
+{
+	Creature creature;
+	if(creatureTree->remove(creature))
+		cout<<"You have removed "<<creature.getName()<<endl;
+	else cout<<"Creature could not be deleted"<<endl;
 }

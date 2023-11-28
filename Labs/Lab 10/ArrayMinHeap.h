@@ -6,7 +6,7 @@
 class ArrayMinHeap
 {
 private:
-    Creature **heapArray;
+    Creature* heapArray;
     int capacity;
     int heap_size;
 
@@ -53,11 +53,14 @@ public:
     ArrayMinHeap(int capacity)
     {
         this->capacity = capacity;
-        heapArray = new Creature*[capacity];
+        heapArray = new Creature[capacity];
         heap_size = 0;
     }
     //destructor
-    ~ArrayMinHeap();
+    ~ArrayMinHeap()
+    {
+        delete[] heapArray;
+    }
 
     //minHeapify function
     //adjusts heap to make sure it fits min heap rule
@@ -68,13 +71,13 @@ public:
         int l = left(index);
         int r = right(index);
         int smallest = index;
-        if (l < heap_size && heapArray[l]->getCost() < heapArray[index]->getCost())
+        if (l < heap_size && heapArray[l].getCost() < heapArray[index].getCost())
             smallest = l;
-        if (r < heap_size && heapArray[r]->getCost() < heapArray[smallest]->getCost())
+        if (r < heap_size && heapArray[r].getCost() < heapArray[smallest].getCost())
             smallest = r;
         if (smallest != index)
         {
-            swap(heapArray[index], heapArray[smallest]);
+            swap(&heapArray[index], &heapArray[smallest]);
             minHeapify(smallest);
         }
 
@@ -91,14 +94,15 @@ public:
             cout << "Error:  there are no nodes in the heap.\n";
             return nullptr;
         }
-        else return heapArray[0];
+        Creature* creaturePtr = &heapArray[0];
+        return creaturePtr;
     }
 
     //remove function
     //removes the root creature and readjusts the heap
     //parameters: reference to creature being deleted(this is just to return the removed creature)
     //returns bool
-    bool remove(Creature*& removedCreature)
+    bool remove(Creature &creature)
     {
         if (isEmpty())
         {
@@ -107,8 +111,8 @@ public:
         }
         else
         {
-            removedCreature = heapArray[0];
-            heapArray[0] = heapArray[heap_size-1];
+            creature = heapArray[0];
+            heapArray[0] = heapArray[heap_size];
             heap_size--;
             minHeapify(0);
             return true;
@@ -122,21 +126,21 @@ public:
 	    }
 
     	// First insert the new value at the end
-	    heapArray[heap_size] = newCreature;
+	    heapArray[heap_size] = *newCreature;
 	    heap_size++;
 	    int i = heap_size - 1;
 
     	// Fix the min heap property if it is violated
-	    while (i != 0 && heapArray[parent(i)] > heapArray[i])
+	    while (i != 0 && heapArray[parent(i)].getCost() > heapArray[i].getCost())
 	    {
-		    swap(heapArray[i], heapArray[parent(i)]);
+		    swap(&heapArray[i], &heapArray[parent(i)]);
 		    i = parent(i);
 	    }
     }
     void resizeArray()
     {
         int cap = capacity * 2; 
-        Creature** newHeapArray = new Creature*[cap];
+        Creature* newHeapArray = new Creature[cap];
         
         for(int x = 0; x < capacity; x++)
         {
@@ -158,6 +162,21 @@ public:
         return heap_size;
     }
 
+    void display()
+    {
+        for(int i = 0; i < heap_size; i++)
+        {
+            heapArray[i].printCreature();
+        }
+    }
+
+    void saveToFile()
+    {
+        for(int i = 0; i < heap_size; i++)
+        {
+            heapArray[i].printCreatureToFile("savedCreatures.txt");
+        }
+    }
 };
 
 #endif
