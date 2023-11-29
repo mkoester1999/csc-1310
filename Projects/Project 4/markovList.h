@@ -124,8 +124,11 @@ string markovList::generate(int length)
 	//make randomnode float so it's not initialized every time the loop runs
 	float randomNode;
 	string returnString = "";
+
 	for (int i = 0; i<length; i++)
 	{
+		map<string, edge*>::iterator it = corpus.begin();	//initialize an iterator to find a random node in the next line
+		advance(it,rand() % corpusSize);
 		randomNode = (float)rand()/RAND_MAX;
 		//compare randomNode to every edge weight in the list
 		//iterate through corpus starting at it
@@ -148,8 +151,9 @@ string markovList::generate(int length)
 			}
 			
 		}
-		return returnString;
 	}
+
+	return returnString;
 }
 
 
