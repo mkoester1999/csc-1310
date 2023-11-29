@@ -1,3 +1,10 @@
+/* File: markovList.h
+   Authors: Mitchell & Bryant Koester
+   Due Date: 11/30/2023
+   Program: Program 4 - Markov Chains
+*/
+
+
 #ifndef MARKOVLIST_H
 #define MARKOVLIST_H
 
@@ -8,6 +15,7 @@
 #include<stdlib.h>
 using namespace std;
 
+//class markovMat
 class markovList
 {
 	private:
@@ -27,6 +35,11 @@ class markovList
 		string generate(int);
 };
 
+//constructor
+//read in the file, build the map
+//map is a map of strings to linked lists of edges
+//each edge has a word, a weight, and a pointer to the next edge
+//the map is a map of strings to the first edge in the linked list
 markovList::markovList(const char* filename)
 {
 	corpusSize = 0;
@@ -76,7 +89,7 @@ markovList::markovList(const char* filename)
 		}
 	}}
 }
-
+//destructor
 markovList::~markovList()
 {
 //write this
@@ -97,7 +110,12 @@ markovList::~markovList()
 	//clear corpus
 	corpus.clear();
 }
-		
+//generate function
+//generate a string of length words
+//start with a random node
+//for each word, generate a random number between 0 and 1
+//compare that number to the weight of each edge in the list
+//if the random number is less than the weight of the edge, add the word to the string		
 string markovList::generate(int length)
 {
 	map<string, edge*>::iterator it = corpus.begin();	//initialize an iterator to find a random node in the next line
