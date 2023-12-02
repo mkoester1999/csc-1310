@@ -1,7 +1,12 @@
 c_cpp_properties.json
+
+#vscode editor settings
 launch.json
 settings.json
 tasks.json
 Projects/Project 2/.vscode/c_cpp_properties.json
 Projects/Project 2/.vscode/launch.json
 Projects/Project 2/.vscode/settings.json
+
+#build files for vscode
+build/
